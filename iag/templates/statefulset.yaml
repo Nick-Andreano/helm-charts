@@ -50,7 +50,15 @@ spec:
         {{- end }}
         {{- if .Values.livenessProbe }}
         livenessProbe:
-          {{- toYaml .Values.livenessProbe | nindent 10 }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          exec:
+            command:
+              - sh
+              - -c
+              - 'test $(pgrep -f automation-gateway | wc -l) -ge 2'
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          successThreshold: {{ .Values.livenessProbe.successThreshold }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
         {{- end }}
         {{- if .Values.readinessProbe }}
         readinessProbe:

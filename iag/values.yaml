@@ -108,9 +108,6 @@ livenessProbe:
   timeoutSeconds: 5
   failureThreshold: 3
   successThreshold: 1
-  httpGet:
-    path: "/api/v2.0/poll"
-    port: 8083
 
 # The readiness probe used to determine if the container is ready to accept requests. If the
 # readiness probe fails, the endpoints controller removes the pod’s IP address from the
